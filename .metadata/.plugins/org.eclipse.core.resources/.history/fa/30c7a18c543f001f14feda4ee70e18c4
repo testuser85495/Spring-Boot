@@ -1,0 +1,66 @@
+package com.demo.controller;
+
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.demo.model.Stu;
+import com.demo.service.StuService;
+
+
+
+@Controller
+public class StuController {
+
+    @Autowired
+    private StuService stuservice;
+
+    
+    @GetMapping("/")
+    public String home() {
+        return "home";
+    }
+    
+    @GetMapping("/index")
+    public ModelAndView index() {
+        Iterable<Stu> stulist = stuservice.getAllStu(); 
+//		ModelAndView mv= new ModelAndView();
+//		mv.setViewName("index");
+//		mv.addObject("stu",stulist);
+        return stulist;
+    }
+
+    @GetMapping("/add")
+    public String add() {
+        return "add";
+    }
+
+    @PostMapping("/save")
+    public String saveStudent(@ModelAttribute Stu s) {
+        stuservice.save(s);
+        return "redirect:/index";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable("id") int id ) {
+        stuservice.deletestu(id);
+        return "redirect:/index";
+    }
+    
+    
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable("id") int id ,Model m) {
+    	System.out.println(id);
+    	Stu stu= stuservice.getById(id);
+    	m.addAttribute("Stu",stu);
+        return "edit";
+    }
+    
+}

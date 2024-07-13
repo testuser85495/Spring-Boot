@@ -1,0 +1,53 @@
+package com.example.demo.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.example.demo.model.Employee;
+import com.example.demo.service.EmployeeService;
+
+@Controller
+public class EmployeeController {
+	
+	@Autowired
+	private EmployeeService eservice;
+	
+	@GetMapping("/")
+	public  String indexPage() {
+		return "index";
+	}
+	@GetMapping("/home")
+	public  ModelAndView homePage() {
+		List<Employee> list= eservice.getAllEmployee();
+		ModelAndView mv= new ModelAndView();
+		mv.setViewName("home");
+		mv.addObject("employee",list);
+		return mv;
+//		else we write this
+//		return new ModelAndView("home","employee",list);
+	}
+
+	@GetMapping("/register")
+	public  String registerPage() {
+		return "register";
+	}
+	
+	@PostMapping("/add")
+	public  String addEmployee(@ModelAttribute Employee e) {
+		System.out.println(e);
+		eservice.save(e);
+		return "redirect:/home";
+	}
+	
+	@DeleteMapping("/delete")
+	public  String registerPage() {
+		return "register";
+	}
+}

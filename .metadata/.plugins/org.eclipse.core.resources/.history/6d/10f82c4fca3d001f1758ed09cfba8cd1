@@ -1,0 +1,39 @@
+package com.demo.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.demo.Repo.StuRepo;
+import com.demo.model.Stu;
+
+@Service
+public class StuService {
+
+	@Autowired
+	private StuRepo sturepo;
+
+	public void save(Stu s) {
+		sturepo.save(s);
+	}
+
+	public Iterable<Stu> getAllStu() {
+		return sturepo.findAll();
+	}
+
+//    public List<Stu> getAllEmployee() {
+//		// TODO Auto-generated method stub
+//		
+//		return sturepo.findAll();
+//	}
+
+	public void deletestu(int id) {
+		sturepo.deleteById(id);
+	}
+
+	public Stu getById(int id) {
+		// TODO Auto-generated method stub
+		System.out.println(sturepo.findById(id));
+		Stu stu = sturepo.findById(id).get();s
+		return stu;
+	}
+}

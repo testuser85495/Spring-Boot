@@ -13,6 +13,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.model.Employee;
 import com.example.demo.service.EmployeeService;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @Controller
@@ -38,7 +41,18 @@ public class EmployeeController {
 
 	@GetMapping("/register")
 	public  String registerPage() {
+		
 		return "register";
+		
+	}
+	
+	@PostMapping("/search")
+	public String searchByName(@RequestParam("name") String name, Model m) {
+//	    List<Employee> emplist = eservice.getByName(name); 
+		List<Employee> emplist = eservice.getByName(name); 
+	    System.out.println(emplist);
+	    m.addAttribute("employee", emplist);
+	    return "searchResults";
 	}
 	
 	@PostMapping("/add")

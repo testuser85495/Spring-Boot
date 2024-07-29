@@ -14,6 +14,11 @@ public class EmployeeService {
 
 	@Autowired
 	private EmployeeRepo eRepo;
+	
+	public List<Employee> getByName(String name) {
+//		return eRepo.findByNameContaining(name);
+		return eRepo.searchByNameOrEmail(name);
+	}
 
 	public void save(Employee e) {
 		System.out.println(e);

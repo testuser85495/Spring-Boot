@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="https://www.thymeleaf.com">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 	<meta charset="utf-8">
@@ -37,8 +37,8 @@
 	</nav>
 	<div class="container col-md-4 offset-md-4 my-5">
 		<h4 class="text-center">Edit Employee</h4>
-		<form  action="/add" method="post" th:object="${employee}">
-			<input type="hidden" name="id" th:value="${employee.id}">			
+		<form action="/add" method="post" th:object="${employee}">
+			<input type="hidden" name="id" th:value="${employee.id}">
 			<div class="mb-3">
 				<label for="name" class="form-label">Name</label>
 				<input type="text" name="name" class="form-control" id="name" th:value="${employee.name}">
@@ -63,6 +63,50 @@
 				<label for="password" class="form-label">password</label>
 				<input type="text" name="password" class="form-control" id="password" th:value="${employee.password}">
 			</div>
+
+			<div class="mb-3">
+				<label>Country : </label>
+				<select name="country" id="Country" class="form-select my-3">
+					<option selected>Select Country</option>
+					<option value="India" th:selected="${employee.getCountry().contains('India')}">India</option>
+					<option value="USA" th:selected="${employee.getCountry().contains('USA')}">USA</option>
+					<option value="Canada" th:selected="${employee.getCountry().contains('Canada')}">Canada</option>
+					<option value="UK" th:selected="${employee.getCountry().contains('UK')}">UK</option>
+				</select>
+			</div>
+
+			<div class="md-3">
+				<label for="gender" class="form-label me-4">Gender : </label>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="Male"
+						th:checked="${employee.getGender().contains('Male')}">
+					<label class="form-check-label" for="inlineRadio1">Male</label>
+				</div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="Female"
+						th:checked="${employee.getGender().contains('Female')}">
+					<label class="form-check-label" for="inlineRadio2">Female</label>
+				</div>
+			</div>
+
+			<div class="mb-3">
+				<label for="hobbies" class="form-label me-4">Hobbies : </label>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" name="hobbies" type="checkbox" id="inlineCheckbox1" value="Playing" th:checked="${employee.getHobbies().contains('Playing')}">
+					<label class="form-check-label" for="inlineCheckbox1" >Playing</label>
+				</div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" name="hobbies" type="checkbox" id="inlineCheckbox2" value="Dancing" th:checked="${employee.getHobbies().contains('Dancing')}">
+					<label class="form-check-label" for="inlineCheckbox2">Dancing</label>
+				</div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" name="hobbies" type="checkbox" id="inlineCheckbox2" value="Reading" th:checked="${employee.getHobbies().contains('Reading')}">
+					<label class="form-check-label" for="inlineCheckbox2">Reading</label>
+				</div>
+			</div>
+
+
+
 			<button type="submit" class="btn btn-primary">Submit</button>
 		</form>
 	</div>

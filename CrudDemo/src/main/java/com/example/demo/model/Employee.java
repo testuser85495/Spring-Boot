@@ -16,6 +16,27 @@ public class Employee {
 	private String address;
 	private String email;
 	private String password;
+	private String gender;
+	private String country;
+	private String hobbies;
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+	public String getCountry() {
+		return country;
+	}
+	public void setCountry(String country) {
+		this.country = country;
+	}
+	public String getHobbies() {
+		return hobbies;
+	}
+	public void setHobbies(String hobbies) {
+		this.hobbies = hobbies;
+	}
 	public int getId() {
 		return id;
 	}
@@ -61,7 +82,8 @@ public class Employee {
 	@Override
 	public String toString() {
 		return "Employee [id=" + id + ", age=" + age + ", salary=" + salary + ", name=" + name + ", address=" + address
-				+ ", email=" + email + ", password=" + password + "]";
+				+ ", email=" + email + ", password=" + password + ", gender=" + gender + ", country=" + country
+				+ ", hobbies=" + hobbies + "]";
 	}
 	
 	
